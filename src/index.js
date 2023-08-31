@@ -5,6 +5,13 @@ const path = require('path');
 
 const app = express();
 const route = require('./routes');
+
+const db = require('./config/db');
+
+
+// Connect to db
+db.connect();
+
 const port = 3000;
 // Config static files
 app.use(express.static(path.join(__dirname, 'public')));
@@ -26,10 +33,10 @@ app.engine(
 );
 app.set('view engine', 'hbs');
 app.set('views', './views');
-app.set       ('views', path.join(__dirname, 'resources/views'));
+app.set('views', path.join(__dirname, 'resources/views'));
 // Route init
-        route(app);
+route(app);
 
-app.listen(port,            () => {
+app.listen(port, () => {
     //console.log(`Example app listening on http://localhost:${port}`)
 });
