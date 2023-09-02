@@ -1,5 +1,6 @@
 <div class="container">
-    <h1>My Courses</h1>
+    <h1 class="display-3">My Courses</h1>
+    <a href="/me/deleted-courses" class="btn btn-danger my-2">Deleted Courses</a>
     <table class="table">
         <thead>
             <tr>
@@ -16,11 +17,11 @@
             {{#each courses}}
             <tr>
                 <th scope="row">{{plusOne @index}}</th>
-                <td>{{this.name}}</td>
+                <td><a class="text-decoration-none" href="/courses/{{this.slug}}">{{this.name}}</a></td>
                 <td>{{this.level}}</td>
                 <td>{{this.createdAt}}</td>
                 <td>{{this.updatedAt}}</td>
-                <td><a href="/courses/{{this._id}}/edit" class="btn btn-link">Edit</a></td>
+                <td><a href="/courses/{{this._id}}/edit" class="btn btn-link" >Edit</a></td>
                 <td>
                     <a href="" class="btn btn-link" data-bs-toggle="modal" data-bs-target="#delete-course-modal"
                         data-bs-id="{{this._id}}" data-bs-name="{{this.name}}">Delete</a>
@@ -47,6 +48,10 @@
                         </div>
                     </div>
                 </td>
+            </tr>
+            {{else}}
+            <tr>
+                <td class="text-center" colspan="7">You haven't created any course yet. <a class="text-decoration-none" href="/courses/create">Create new course</a></td>
             </tr>
             {{/each}}
         </tbody>

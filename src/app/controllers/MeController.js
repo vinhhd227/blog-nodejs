@@ -4,7 +4,7 @@ const { mongooseToObject } = require('../../util/mongoose');
 class MeController {
     // [GET] '/me/stored/courses'
     storedCourses(req, res, next) {
-        Course.find({}).exec()
+        Course.find({})
             .then(courses => {
                 res.render('me/stored-courses', {
                     courses: multipleMongooseToObject(courses)
@@ -12,20 +12,15 @@ class MeController {
             })
             .catch(next);
     }
-    // // [GET] '/courses/create'
-    // create(req, res) {
-    //     res.render('courses/create');
-    // }
-    // // [POST] '/courses/store'
-    // store(req, res) {
-    //     const formData = req.body
-    //     formData.image = `https://img.youtube.com/vi/${req.body.videoId}/sddefault.jpg`;
-    //     const course = new Course(formData);
-    //     course.save().then(() => res.redirect('/courses'))
-    //         .catch(error => {
-
-    //         });
-    // }
+    deletedCourses(req, res, next) {
+        Course.findDeleted({})
+            .then(courses => {
+                res.render('me/deleted-courses', {
+                    courses: multipleMongooseToObject(courses)
+                })
+            })
+            .catch(next);
+    }
 }
 
 module.exports = new MeController();
